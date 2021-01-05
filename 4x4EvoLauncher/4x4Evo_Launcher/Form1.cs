@@ -15,14 +15,6 @@ namespace _4x4Evo_Launcher
         public Form1()
         {
             InitializeComponent();
-            string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
-            string[] SetValues = File.ReadAllLines(SetFile);
-            if (!(SetValues.Length < 3))
-            {
-                ClassGUID_Box.Text = SetValues[0];
-                InstancePath_Box.Text = SetValues[1];
-                GameFile_Box.Text = SetValues[2];
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,7 +40,14 @@ namespace _4x4Evo_Launcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
+            string[] SetValues = File.ReadAllLines(SetFile);
+            if (!(SetValues.Length < 3))
+            {
+                ClassGUID_Box.Text = SetValues[0];
+                InstancePath_Box.Text = SetValues[1];
+                GameFile_Box.Text = SetValues[2];
+            }
         }
     }
 }

@@ -45,5 +45,10 @@ namespace _4x4Evo_Launcher
         {
             MessageBox.Show($"Find the device which is causing the game crash by opening your 'Device Manager' and disabling one 'HID-compliant vendor-defined device' at a time, until you find the culprit device. Once you find it, open the properties, go to 'Details' and copy the 'Class GUID', and the 'Device instance path'. Next, simply choose the executable file for your 4x4 Evolution game, and click 'Accept'. If everything is successful, then the form will not appear again.", "4x4EvoLauncher Help", MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

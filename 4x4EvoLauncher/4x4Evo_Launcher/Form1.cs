@@ -49,5 +49,20 @@ namespace _4x4Evo_Launcher
                 GameFile_Box.Text = SetValues[2];
             }
         }
+
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
+        }
     }
 }

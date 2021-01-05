@@ -22,11 +22,14 @@ namespace _4x4Evo_Launcher
                 TryLaunch();
                 Application.Exit();
             }
+            else
+            {
                 Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            TryLaunch();
-            
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());
+                TryLaunch();
+                Application.Exit();
+            }
         }
 
         static void TryLaunch()

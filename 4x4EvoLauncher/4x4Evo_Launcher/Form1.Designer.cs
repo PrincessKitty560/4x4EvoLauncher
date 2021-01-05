@@ -43,6 +43,7 @@ namespace _4x4Evo_Launcher
             this.button1 = new System.Windows.Forms.Button();
             this.Accept_Button = new System.Windows.Forms.Button();
             this.Help_Button = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -149,19 +150,36 @@ namespace _4x4Evo_Launcher
             // 
             // Help_Button
             // 
-            this.Help_Button.Location = new System.Drawing.Point(432, 325);
+            this.Help_Button.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Help_Button.Cursor = System.Windows.Forms.Cursors.Help;
+            this.Help_Button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Help_Button.Location = new System.Drawing.Point(12, 12);
             this.Help_Button.Name = "Help_Button";
-            this.Help_Button.Size = new System.Drawing.Size(54, 40);
+            this.Help_Button.Size = new System.Drawing.Size(43, 33);
             this.Help_Button.TabIndex = 11;
             this.Help_Button.Text = "HELP";
-            this.Help_Button.UseVisualStyleBackColor = true;
+            this.Help_Button.UseVisualStyleBackColor = false;
             this.Help_Button.Click += new System.EventHandler(this.Help_Button_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(452, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(34, 33);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "X";
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(498, 377);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.Help_Button);
             this.Controls.Add(this.Accept_Button);
             this.Controls.Add(this.button1);
@@ -174,6 +192,7 @@ namespace _4x4Evo_Launcher
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
@@ -198,6 +217,7 @@ namespace _4x4Evo_Launcher
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Accept_Button;
         private System.Windows.Forms.Button Help_Button;
+        private System.Windows.Forms.Button button2;
     }
 }
 

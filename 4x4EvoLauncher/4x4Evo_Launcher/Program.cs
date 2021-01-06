@@ -25,11 +25,20 @@ namespace _4x4Evo_Launcher
 
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            Application.Exit();
-        }
+            try
+            {
+                Program program = new Program();
+                program.TryLaunch();
+                Application.Exit();
+            }
+            catch
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());
+                Application.Exit();
+            }
+            }
 
         public void LoadSettings()
         {
@@ -55,6 +64,7 @@ namespace _4x4Evo_Launcher
 
         public void TryLaunch()
         {
+            LoadSettings();
             if (!(SetValues.Length < 3))
             {
                 string SetClassGUID = SetValues[0];
@@ -63,17 +73,17 @@ namespace _4x4Evo_Launcher
 
                 try
                 {
-                    Guid mouseGuid = new Guid(SetClassGUID);
+                    Guid DevGuid = new Guid(SetClassGUID);
                     string instancePath = SetInstancePath;
 
-                    DeviceHelper.SetDeviceEnabled(mouseGuid, instancePath, false);
+                    DeviceHelper.SetDeviceEnabled(DevGuid, instancePath, false);
 
                     Process p = new Process();
                     p.StartInfo = new ProcessStartInfo(SetGamePath);
                     p.Start();
                     p.WaitForExit();
 
-                    DeviceHelper.SetDeviceEnabled(mouseGuid, instancePath, true);
+                    DeviceHelper.SetDeviceEnabled(DevGuid, instancePath, true);
                 }
                 catch (Exception e)                {
                     MessageBox.Show("An error has occurred trying to launch the 4x4 Evolution Game.", "4x4EvoLauncher Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

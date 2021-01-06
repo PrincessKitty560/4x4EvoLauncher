@@ -58,7 +58,7 @@ namespace _4x4Evo_Launcher
             }
             catch
             {
-                MessageBox.Show("Note: Building settings.cfg file");
+                MessageBox.Show("Note: Building settings.cfg file", "4x4EvoLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 string[] tempString = new string[3] {
                     "",

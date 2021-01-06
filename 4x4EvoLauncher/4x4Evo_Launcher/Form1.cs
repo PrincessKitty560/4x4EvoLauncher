@@ -15,12 +15,16 @@ namespace _4x4Evo_Launcher
         public Form1()
         {
             InitializeComponent();
+            Program program = new Program();
+            program.LoadSettings();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Multiselect = false;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 string sFileName = openFileDialog1.FileName;
                 GameFile_Box.Text = sFileName;
             }
@@ -28,9 +32,14 @@ namespace _4x4Evo_Launcher
 
         private void Accept_Button_Click(object sender, EventArgs e)
         {
+            // This should be moved to Program.cs in some form. But I am le-tired
             string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
             File.WriteAllText(SetFile, $"{ClassGUID_Box.Text}\n{InstancePath_Box.Text}\n{GameFile_Box.Text}");
-            Form1.ActiveForm.Close();
+            
+            // Attempt launching, and close launcher
+            Program program = new Program();
+            program.TryLaunch();
+            Application.Exit();
         }
 
         private void Help_Button_Click(object sender, EventArgs e)
@@ -41,7 +50,31 @@ namespace _4x4Evo_Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
-            string[] SetValues = File.ReadAllLines(SetFile);
+            string[] SetValues = new string[3];
+
+            try
+            {
+                SetValues = File.ReadAllLines(SetFile);
+            }
+            catch
+            {
+                MessageBox.Show("Note: Building settings.cfg file");
+
+                string[] tempString = new string[3] {
+                    "",
+                    "",
+                    ""
+                };
+
+                int evoVersionDetected = 0;
+                if (File.Exists(Directory.GetCurrentDirectory() + "\\4x4.exe")) evoVersionDetected = 1;
+                else if (File.Exists(Directory.GetCurrentDirectory() + "\\4x42.exe")) evoVersionDetected = 2;
+
+                if (evoVersionDetected == 1) tempString[2] = Directory.GetCurrentDirectory() + "\\4x4.exe";
+                else if (evoVersionDetected == 2) tempString[2] = Directory.GetCurrentDirectory() + "\\4x42.exe";
+                File.WriteAllLines(SetFile, tempString);
+            }
+
             if (!(SetValues.Length < 3))
             {
                 ClassGUID_Box.Text = SetValues[0];

@@ -8,34 +8,53 @@ using System.Diagnostics;
 
 namespace _4x4Evo_Launcher
 {
-    static class Program
+    class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        // [STAThread]
+
+        static string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
+        static string[] SetValues = new string[3]
+        {
+                "",
+                "",
+                ""
+        };
+
         static void Main()
         {
-            string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
-            if (File.Exists(SetFile))
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+            Application.Exit();
+        }
+
+        public void LoadSettings()
+        {
+            // Attempt to read settings.cfg file, if it fails generate a new file
+            try
             {
-                TryLaunch();
-                Application.Exit();
+                SetValues = File.ReadAllLines(SetFile);
             }
-            else
+            catch (Exception)
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());
-                TryLaunch();
-                Application.Exit();
+                // Check if this is in 4x4 Evo's directory, if so then auto populate
+                int evoVersionDetected = 0;
+                if (File.Exists(Directory.GetCurrentDirectory() + "\\4x4.exe")) evoVersionDetected = 1;
+                else if (File.Exists(Directory.GetCurrentDirectory() + "\\4x42.exe")) evoVersionDetected = 2;
+
+                if (evoVersionDetected == 1) SetValues[2] = Directory.GetCurrentDirectory() + "\\4x4.exe";
+                else if (evoVersionDetected == 2) SetValues[2] = Directory.GetCurrentDirectory() + "\\4x42.exe";
+
+                // Finally save the new file
+                File.WriteAllLines(SetFile, SetValues);
             }
         }
 
-        static void TryLaunch()
+        public void TryLaunch()
         {
-            string SetFile = $"{Directory.GetCurrentDirectory()}/Settings.cfg";
-            string[] SetValues = File.ReadAllLines(SetFile);
             if (!(SetValues.Length < 3))
             {
                 string SetClassGUID = SetValues[0];
